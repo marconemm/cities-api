@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cities
+    username: marconemm
+    password: 123456
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: ${PORT:8080}
+
+#show sql statement
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+        type:
+          descriptor:
+            sql: trace
