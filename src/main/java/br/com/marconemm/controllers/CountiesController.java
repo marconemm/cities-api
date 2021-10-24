@@ -1,7 +1,7 @@
 package br.com.marconemm.controllers;
 
 import br.com.marconemm.models.Country;
-import br.com.marconemm.services.CountryService;
+import br.com.marconemm.services.CountiesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,12 +13,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/V1/countries")
-public class CountryController {
+public class CountiesController {
 
-    private CountryService countryService;
+    private CountiesService countryService;
 
     @Autowired
-    public CountryController(final CountryService countryService) {
+    public CountiesController(final CountiesService countryService) {
         this.countryService = countryService;
     }
 

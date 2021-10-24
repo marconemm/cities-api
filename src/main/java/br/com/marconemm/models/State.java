@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -70,12 +72,21 @@ public class State {
         this.country_id = country_id;
     }
 
-    public String getDdd() {
-        return ddd;
+    public ArrayList<Integer> getDdd() {
+        final String[] strList = ddd.substring(1, ddd.length() -1).split(",");
+        final ArrayList<Integer> result =new ArrayList<Integer>();
+
+        for (String s : strList) {
+            result.add(Integer.parseInt(s));
+        }
+
+        return result;
     }
 
-    public void setDdd(String ddd) {
-        this.ddd = ddd;
+    public void setDdd(ArrayList<Integer> ddd) {
+        if (ddd != null){
+            this.ddd = ddd.toString();
+        }
     }
 
     @Override
