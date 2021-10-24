@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/V1/countries")
 public class CountryController {
@@ -21,7 +23,12 @@ public class CountryController {
     }
 
     @GetMapping
-    public Page<Country> getAll(Pageable page) {
-        return countryService.getAll(page);
+    public List<Country> getAll(){
+        return countryService.getAll();
+    }
+
+    @GetMapping("/pageable")
+    public Page<Country> getAllByPage(Pageable page) {
+        return countryService.getAllByPage(page);
     }
 }

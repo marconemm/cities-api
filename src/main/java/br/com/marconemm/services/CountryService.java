@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CountryService {
 
@@ -17,7 +19,11 @@ public class CountryService {
         this.countryRepo = countryRepo;
     }
 
-    public Page<Country> getAll(Pageable page) {
-        return countryRepo.findAll(page);
+    public List<Country> getAll() {
+        return countryRepo.findAll();
+    }
+
+    public Page<Country> getAllByPage(Pageable page) {
+        return  countryRepo.findAll(page);
     }
 }
