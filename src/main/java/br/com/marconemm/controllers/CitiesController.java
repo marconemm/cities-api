@@ -1,7 +1,9 @@
 package br.com.marconemm.controllers;
 
 import br.com.marconemm.exceptions.StateNotFoundException;
+import br.com.marconemm.models.City;
 import br.com.marconemm.models.State;
+import br.com.marconemm.services.CitiesService;
 import br.com.marconemm.services.StatesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,36 +18,31 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/V1/states")
-public class StatesController {
+@RequestMapping("/V1/cities")
+public class CitiesController {
 
-    private StatesService stateService;
+    private CitiesService citiesService;
 
     @Autowired
-    public StatesController(final StatesService countryService) {
-        this.stateService = countryService;
-    }
-
-    @GetMapping
-    public List<State> getAll() {
-        return stateService.getAll();
+    public CitiesController(final CitiesService citiesService) {
+        this.citiesService = citiesService;
     }
 
     @GetMapping("/pageable")
-    public Page<State> getAllByPage(Pageable page) {
-        return stateService.getAllByPage(page);
+    public Page<City> getAllByPage(Pageable page) {
+        return citiesService.getAllByPage(page);
     }
 
-    @GetMapping("/{uf}")
-    public ResponseEntity<State> getByCode(@PathVariable String uf) throws StateNotFoundException {
-        if (uf.length() != 2) {
-            final State invalidState = new State();
-            invalidState.setState("Invalid UF code.");
+    @GetMapping("/{id}")
+    public ResponseEntity<City> getByCode(@PathVariable Integer id) throws StateNotFoundException {
+        if (id < 1 || id > 5609) {
+            final City invalidCity = new City();
+            invalidCity.setName("Invalid ID informed.");
 
-            return ResponseEntity.badRequest().body(invalidState);
+            return ResponseEntity.badRequest().body(invalidCity);
         }
 
-        final Optional<State> result = stateService.getByCode(uf);
+        final Optional<City> result = citiesService.getByID(id);
 
         return ResponseEntity.ok().body(result.get());
     }

@@ -1,11 +1,7 @@
 package br.com.marconemm.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -24,7 +20,9 @@ public class State {
 
     private Integer ibge_code;
 
-    private Integer country_id;
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn(name = "country_id", referencedColumnName = "id")
+    private Country country;
 
     @Column(length = 28)
     private String ddd;
@@ -64,12 +62,12 @@ public class State {
         this.ibge_code = ibge_code;
     }
 
-    public Integer getCountry_id() {
-        return country_id;
+    public Country getCountry() {
+        return country;
     }
 
-    public void setCountry_id(Integer country_id) {
-        this.country_id = country_id;
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     public ArrayList<Integer> getDdd() {
@@ -94,12 +92,12 @@ public class State {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         State states = (State) o;
-        return id.equals(states.id) && name.equals(states.name) && state.equals(states.state) && ibge_code.equals(states.ibge_code) && country_id.equals(states.country_id) && ddd.equals(states.ddd);
+        return id.equals(states.id) && name.equals(states.name) && state.equals(states.state) && ibge_code.equals(states.ibge_code) && country.equals(states.country) && ddd.equals(states.ddd);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, state, ibge_code, country_id, ddd);
+        return Objects.hash(id, name, state, ibge_code, country, ddd);
     }
 
     @Override
@@ -109,7 +107,7 @@ public class State {
                 ", name='" + name + '\'' +
                 ", state='" + state + '\'' +
                 ", ibge_code=" + ibge_code +
-                ", country_id=" + country_id +
+                ", country_id=" + country +
                 ", ddd='" + ddd + '\'' +
                 '}';
     }
