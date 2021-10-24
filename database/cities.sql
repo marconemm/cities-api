@@ -20,38 +20,19 @@ CREATE TABLE public.cities (
     state_id integer references states(id)
 );
 
-
 COMMENT ON COLUMN public.cities.cod_tom
   IS 'Code TOM (Brazilian SEFAZ)';
 
+CREATE SEQUENCE public.cities_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
---CREATE SEQUENCE public.cidade_id_seq
---    START WITH 1
---    INCREMENT BY 1
---    NO MINVALUE
---    NO MAXVALUE
---    CACHE 1;
+ALTER SEQUENCE public.cities_id_seq OWNED BY public.cities.id;
 
-
---ALTER TABLE public.cidade_id_seq OWNER TO postgres;
-
---
--- Name: cidade_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
---ALTER SEQUENCE public.cidade_id_seq OWNED BY public.cidade.id;
-
-
---
--- Name: cidade id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
---ALTER TABLE ONLY public.cidade ALTER COLUMN id SET DEFAULT nextval('public.cidade_id_seq'::regclass);
-
-
---
--- Inserindo dados na tabela "cidade"
---
+ALTER TABLE ONLY public.cities ALTER COLUMN id SET DEFAULT nextval('public.cities_id_seq'::regclass);
 
 INSERT INTO cities (id, name, state_id, ibge_code, lat_lon, latitude, longitude, cod_tom) VALUES
 (1,	'Afonso Cláudio',	8,	3200102,	'(-20.0778007507324006,-41.1260986328125)',	-2.00778007507324E+17,	-411260986328125,	5601),
