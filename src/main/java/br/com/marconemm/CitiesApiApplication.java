@@ -1,4 +1,4 @@
-package br.com.marconemm.cities_api;
+package br.com.marconemm;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

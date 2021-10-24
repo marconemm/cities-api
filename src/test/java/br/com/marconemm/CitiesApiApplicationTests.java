@@ -1,4 +1,4 @@
-package br.com.marconemm.cities_api;
+package br.com.marconemm;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
