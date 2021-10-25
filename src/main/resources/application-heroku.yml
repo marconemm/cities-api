@@ -1,6 +1,9 @@
+server:
+  port: ${PORT:5431}
+
 spring:
   datasource:
     url: ${DATABASE_URL}
 
   jpa:
-    show-sql: true
+    show-sql: false

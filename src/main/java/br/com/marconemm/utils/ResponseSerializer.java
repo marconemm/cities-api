@@ -28,7 +28,7 @@ public final class ResponseSerializer<T> {
             }
         }
 
-        if (msg.contains("meters")) {
+        if (msg != null && msg.contains("meters")) {
             if (data != null) map.put("distance", data);
         } else {
             if (data != null) map.put("data", data);
