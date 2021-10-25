@@ -32,7 +32,7 @@ public class StatesService {
     public Optional<State> getByCode(String uf) throws StateNotFoundException {
         final Optional<State> result = serviceRepo.getByCode(uf.toUpperCase());
 
-        if (result.isEmpty()){
+        if (!result.isPresent()){
             throw new StateNotFoundException(uf);
         }
 
