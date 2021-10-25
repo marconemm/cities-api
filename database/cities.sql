@@ -7,6 +7,9 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
 
+-- Install the extension Cube
+CREATE EXTENSION cube;
+
 DROP TABLE IF EXISTS cities CASCADE;
 
 CREATE TABLE public.cities (
