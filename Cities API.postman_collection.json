@@ -1,0 +1,240 @@
+{
+	"info": {
+		"_postman_id": "38022f67-39dd-4129-b44d-da7fc45501e3",
+		"name": "Cities API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Countries",
+			"item": [
+				{
+					"name": "Get All Countries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/{{version}}/{{countries}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"{{version}}",
+								"{{countries}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Countries Pageable",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/{{version}}/{{countries}}/pageable?page=0&size=2&sort=name,asc",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"{{version}}",
+								"{{countries}}",
+								"pageable"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0",
+									"description": "the resouce page number"
+								},
+								{
+									"key": "size",
+									"value": "2",
+									"description": "the amount of itens per page"
+								},
+								{
+									"key": "sort",
+									"value": "name,asc",
+									"description": "sort by name and ascendent"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "## Rmk:\n- _The unique country present in this API is **Brazil**._"
+		},
+		{
+			"name": "States",
+			"item": [
+				{
+					"name": "Get All States",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/{{version}}/{{states}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"{{version}}",
+								"{{states}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get  States By UF code",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/{{version}}/{{states}}/pe",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"{{version}}",
+								"{{states}}",
+								"pe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get States Pageable",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/{{version}}/{{states}}/pageable?page=2&size=4&sort=name,asc",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"{{version}}",
+								"{{states}}",
+								"pageable"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2",
+									"description": "the resouce page number"
+								},
+								{
+									"key": "size",
+									"value": "4",
+									"description": "the amount of itens per page"
+								},
+								{
+									"key": "sort",
+									"value": "name,asc",
+									"description": "sort by name and ascendent"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "### _Find all states, pageable or not, and by UF code._"
+		},
+		{
+			"name": "Cities",
+			"item": [
+				{
+					"name": "Get  City By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/{{version}}/{{cities}}/446",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"{{version}}",
+								"{{cities}}",
+								"446"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cities Pageable",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/{{version}}/{{cities}}/pageable?page=2&size=5&sort=name,asc",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"{{version}}",
+								"{{cities}}",
+								"pageable"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2",
+									"description": "the resouce page number"
+								},
+								{
+									"key": "size",
+									"value": "5",
+									"description": "the amount of itens per page"
+								},
+								{
+									"key": "sort",
+									"value": "name,asc",
+									"description": "sort by name and ascendent"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get  Distance Between",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/{{version}}/{{cities}}/getDistance?cityId_1=1&cityId_2=2",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"{{version}}",
+								"{{cities}}",
+								"getDistance"
+							],
+							"query": [
+								{
+									"key": "cityId_1",
+									"value": "1",
+									"description": "The first city ID"
+								},
+								{
+									"key": "cityId_2",
+									"value": "2",
+									"description": "The second city ID"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "### _Find cities, distances between two of them and much more._"
+		}
+	]
+}
