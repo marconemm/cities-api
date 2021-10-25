@@ -1,32 +1,24 @@
 package br.com.marconemm.controllers;
 
-import br.com.marconemm.exceptions.StateNotFoundException;
 import br.com.marconemm.models.City;
-import br.com.marconemm.models.State;
 import br.com.marconemm.services.CitiesService;
-import br.com.marconemm.services.StatesService;
+import br.com.marconemm.utils.ResponseSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/V1/cities")
 public class CitiesController {
 
-    private CitiesService citiesService;
-
     @Autowired
-    public CitiesController(final CitiesService citiesService) {
-        this.citiesService = citiesService;
-    }
+    private CitiesService citiesService;
 
     @GetMapping("/pageable")
     public Page<City> getAllByPage(Pageable page) {
@@ -34,16 +26,31 @@ public class CitiesController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<City> getByCode(@PathVariable Integer id) throws StateNotFoundException {
+    public ResponseEntity<Map<String, Object>> getByCode(@PathVariable Integer id) {
+        ResponseSerializer<City> serializer = new ResponseSerializer<>();
+
         if (id < 1 || id > 5609) {
             final City invalidCity = new City();
-            invalidCity.setName("Invalid ID informed.");
+            serializer.setMsg("Invalid ID informed.");
+            serializer.setStatus(HttpStatus.BAD_REQUEST);
 
-            return ResponseEntity.badRequest().body(invalidCity);
+            return serializer.toJSON();
         }
 
         final Optional<City> result = citiesService.getByID(id);
+        serializer.setData(result.get());
+        serializer.setStatus(HttpStatus.OK);
 
-        return ResponseEntity.ok().body(result.get());
+        return serializer.toJSON();
+    }
+
+    @GetMapping("/getDistance")
+    public Float getDistanceBetween(@RequestParam(name = "cityId_1") Integer cityId1,
+                                    @RequestParam(name = "cityId_2") Integer cityId2){
+
+        System.out.println(cityId1);
+        System.out.println(cityId2);
+
+        return 0f;
     }
 }

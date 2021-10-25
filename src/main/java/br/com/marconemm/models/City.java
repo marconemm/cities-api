@@ -1,9 +1,18 @@
 package br.com.marconemm.models;
 
+import br.com.marconemm.utils.PointType;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
+import org.springframework.data.geo.Point;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "cities")
+@TypeDefs(value = {
+        @TypeDef(name = "point", typeClass = PointType.class)
+})
 public class City {
 
     @Id
@@ -14,10 +23,14 @@ public class City {
     private String name;
 
     @Column(length = 120, name = "ibge_code")
-    private String ibgeCode;
+    private String codeIBGE;
 
     private Double latitude;
     private Double longitude;
+
+    @Column(name = "lat_lon")
+    @Type(type = "point")
+    private Point geoLoc;
 
     @Column(name = "cod_tom")
     private Short codTom;
@@ -45,12 +58,20 @@ public class City {
         this.name = name;
     }
 
-    public String getIbgeCode() {
-        return ibgeCode;
+    public String getCodeIBGE() {
+        return codeIBGE;
     }
 
-    public void setIbgeCode(String ibgeCode) {
-        this.ibgeCode = ibgeCode;
+    public void setCodeIBGE(String codeIBGE) {
+        this.codeIBGE = codeIBGE;
+    }
+
+    public Point getGeoLoc() {
+        return geoLoc;
+    }
+
+    public void setGeoLoc(Point geoLoc) {
+        this.geoLoc = geoLoc;
     }
 
     public Double getLatitude() {
