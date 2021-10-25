@@ -45,12 +45,15 @@ public class CitiesController {
     }
 
     @GetMapping("/getDistance")
-    public Float getDistanceBetween(@RequestParam(name = "cityId_1") Integer cityId1,
-                                    @RequestParam(name = "cityId_2") Integer cityId2){
+    public ResponseEntity<Map<String, Object>> getDistanceBetween(@RequestParam(name = "cityId_1") Integer cityId1,
+                                                                  @RequestParam(name = "cityId_2") Integer cityId2) {
 
-        System.out.println(cityId1);
-        System.out.println(cityId2);
+        final ResponseSerializer<Integer> response = new ResponseSerializer<>();
+        final Double distance = citiesService.getDistanceBetween(cityId1, cityId2);
 
-        return 0f;
+        response.setMsg("Distance in meters");
+        response.setData(distance.intValue());
+
+        return response.toJSON();
     }
 }

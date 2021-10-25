@@ -9,35 +9,36 @@ import java.util.Map;
 public final class ResponseSerializer<T> {
 
     private String msg;
-    private HttpStatus status;
+    private HttpStatus status = HttpStatus.OK;
     private T data;
 
     public ResponseSerializer() {
         msg = null;
-        status = null;
         data = null;
     }
 
-    public ResponseEntity<Map<String, Object>> toJSON(){
+    public ResponseEntity<Map<String, Object>> toJSON() {
         Map<String, Object> map = new HashMap<>();
 
-        if (msg != null) map.put("message", msg);
-        if (data != null) map.put("data", data);
-        if (status != null) map.put("status", status.value());
+        if (msg != null) {
+            if (status != HttpStatus.OK && status != HttpStatus.ACCEPTED) {
+                map.put("error", msg);
+            } else {
+                map.put("msg", msg);
+            }
+        }
 
-        return new ResponseEntity<>(map,status);
-    }
+        if (msg.contains("meters")) {
+            if (data != null) map.put("distance", data);
+        } else {
+            if (data != null) map.put("data", data);
+        }
 
-    public String getMsg() {
-        return msg;
+        return new ResponseEntity<>(map, status);
     }
 
     public void setMsg(String msg) {
         this.msg = msg;
-    }
-
-    public HttpStatus getStatus() {
-        return status;
     }
 
     public void setStatus(HttpStatus status) {

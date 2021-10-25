@@ -28,4 +28,24 @@ public class CitiesService {
 
         return result;
     }
+
+    public Double getDistanceBetween(Integer cityId1, Integer cityId2) {
+        
+        final Optional<City> city1 = getByID(cityId1);
+
+        if (city1.isPresent()){
+            final Double city1Lat = city1.get().getLatitude();
+            final Double city1Lon = city1.get().getLongitude();
+            final Optional<City> city2 = getByID(cityId2);
+
+            if(city2.isPresent()){
+                final Double city2Lat = city2.get().getLatitude();
+                final Double city2Lon = city2.get().getLongitude();
+                return citiesRepo.getDistanceBetween(city1Lat, city1Lon, city2Lat, city2Lon);
+
+            }
+        }
+
+        return null;
+    }
 }

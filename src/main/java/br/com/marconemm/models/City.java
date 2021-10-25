@@ -94,10 +94,6 @@ public class City {
         return codTom;
     }
 
-    public void setCodTom(Short codTom) {
-        this.codTom = codTom;
-    }
-
     public State getState() {
         return state;
     }
